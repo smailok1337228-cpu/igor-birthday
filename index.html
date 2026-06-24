@@ -323,10 +323,15 @@ max-width:768px{
         </div>
 
         <div class="text">
-            Дорогие друзья!
+          Дорогие друзья!
 
-            Буду рад провести этот летний вечер вместе с вами.
-        </div>
+          Буду рад провести этот летний вечер вместе с вами.
+
+          💦 Купальники и банные принадлежности
+          лучше захватить с собой 😉
+
+         🔥 Баня и бассейн уже ждут нас! 😎
+      </div>
 
         <div class="card">
 
@@ -633,8 +638,9 @@ function animate(){
 
 animate();
 document.getElementById('surpriseBtn').addEventListener('click', () => {
-    alert(
-`🎁 Последний сюрприз
+
+    alert(`
+🎁 Последний сюрприз
 
 Как я задолбался делать этот сайт 😂
 
@@ -642,8 +648,14 @@ document.getElementById('surpriseBtn').addEventListener('click', () => {
 
 Жду всех на своём дне рождения ❤️
 
-— Игорь`
-    );
+— Игорь
+`);
+
+    const btn = document.getElementById('surpriseBtn');
+
+    btn.outerHTML =
+    '<div style="margin-top:20px;font-size:14px;color:#ddd;">🥲 Понял, принял. Не дурак.</div>';
+
 });
 </script>
 
