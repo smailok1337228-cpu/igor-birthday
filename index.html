@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>День рождения Игоря</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    overflow:hidden;
+    color:white;
+}
+
+/* ВИДЕО */
+
+#bg-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-3;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:
+    linear-gradient(
+        rgba(67,35,90,.35),
+        rgba(0,0,0,.55)
+    );
+    z-index:-2;
+}
+
+/* КОНТЕНТ */
+
+.container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    text-align:center;
+}
+
+.content{
+    max-width:900px;
+}
+
+.invite{
+    font-family:'Marck Script',cursive;
+    font-size:44px;
+    color:#ffe3a1;
+    margin-bottom:10px;
+    animation:fadeDown 1.5s ease;
+}
+
+.name-wrapper{
+    position:relative;
+    display:inline-block;
+    margin:10px 0 25px;
+}
+
+.name{
+    font-size:82px;
+    font-weight:700;
+
+    text-shadow:
+    0 0 10px #ffd700,
+    0 0 25px #ffd700,
+    0 0 50px #ff9f1c;
+}
+
+/* ИСКРЫ */
+
+.spark{
+    position:absolute;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#ffd700;
+
+    box-shadow:
+    0 0 10px #ffd700,
+    0 0 20px #ffd700,
+    0 0 30px #ffd700;
+
+    animation:sparkle 2s infinite;
+}
+
+.spark1{
+    left:-20px;
+    top:15px;
+}
+
+.spark2{
+    right:-20px;
+    top:15px;
+    animation-delay:.5s;
+}
+
+.spark3{
+    left:50%;
+    top:-15px;
+    animation-delay:1s;
+}
+
+.spark4{
+    right:30%;
+    bottom:-10px;
+    animation-delay:1.5s;
+}
+
+.text{
+    font-size:22px;
+    line-height:1.7;
+}
+
+.card{
+    margin-top:25px;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+}
+
+.info{
+    margin:12px 0;
+    font-size:22px;
+}
+
+/* ТАЙМЕР */
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:25px;
+}
+
+.box{
+    min-width:90px;
+    padding:12px;
+    border-radius:16px;
+    background:rgba(255,255,255,.15);
+}
+
+.num{
+    font-size:30px;
+    font-weight:700;
+}
+
+.label{
+    font-size:12px;
+}
+
+/* КНОПКИ */
+
+.buttons{
+    margin-top:25px;
+}
+
+.btn{
+    display:inline-block;
+
+    margin:8px;
+
+    padding:15px 28px;
+
+    border:none;
+    border-radius:50px;
+
+    cursor:pointer;
+
+    color:white;
+    text-decoration:none;
+
+    font-weight:600;
+
+    background:
+    linear-gradient(
+        45deg,
+        #ff8a00,
+        #e52e71
+    );
+
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+/* ФЕЙЕРВЕРК */
+
+#fireworks{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:5;
+}
+
+@keyframes sparkle{
+
+    0%,100%{
+        opacity:0;
+        transform:scale(.3);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.5);
+    }
+}
+
+@keyframes fadeDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+max-width:768px{
+
+    .invite{
+        font-size:34px;
+    }
+
+    .name{
+        font-size:54px;
+    }
+
+    .text{
+        font-size:18px;
+    }
+
+    .info{
+        font-size:18px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ВИДЕО -->
+
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="summer-evening.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- ФЕЙЕРВЕРК -->
+
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+
+    <div class="content">
+
+        <div class="invite">
+            Приглашение на День Рождения
+        </div>
+
+        <div class="name-wrapper">
+
+            <div class="spark spark1"></div>
+            <div class="spark spark2"></div>
+            <div class="spark spark3"></div>
+            <div class="spark spark4"></div>
+
+            <div class="name">
+Игорь ✨
+            </div>
+
+        </div>
+
+        <div class="text">
+            Дорогие друзья!
+
+            Буду рад провести этот летний вечер вместе с вами.
+        </div>
+
+        <div class="card">
+
+            <div class="info">
+                📅 26 июня
+            </div>
+
+            <div class="info">
+                🕖 19:00
+            </div>
+
+            <div class="info">
+                📍 село Ямное, улица Ленина, дом 100
+            </div>
+
+            <div class="countdown">
+
+                <div class="box">
+                    <div class="num" id="days">0</div>
+                    <div class="label">ДНЕЙ</div>
+                </div>
+
+                <div class="box">
+                    <div class="num" id="hours">0</div>
+                    <div class="label">ЧАСОВ</div>
+                </div>
+
+                <div class="box">
+                    <div class="num" id="minutes">0</div>
+                    <div class="label">МИНУТ</div>
+                </div>
+
+                <div class="box">
+                    <div class="num" id="seconds">0</div>
+                    <div class="label">СЕКУНД</div>
+                </div>
+
+            </div>
+
+            <div class="buttons">
+
+                <a
+                    href="https://t.me/ryzhyi_36"
+                    target="_blank"
+                    class="btn">
+
+                    ✅ Я приду
+
+                </a>
+
+                <button
+                    id="musicBtn"
+                    class="btn">
+
+                    🔊 Включить музыку
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- МУЗЫКА -->
+
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* МУЗЫКА */
+
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+
+musicBtn.onclick = () => {
+
+    if(music.paused){
+
+        music.play();
+
+        musicBtn.innerHTML =
+        '🔇 Выключить музыку';
+
+    }else{
+
+        music.pause();
+
+        musicBtn.innerHTML =
+        '🔊 Включить музыку';
+    }
+};
+
+/* ТАЙМЕР */
+
+const targetDate =
+new Date("2026-06-26T19:00:00");
+
+function updateTimer(){
+
+    const now = new Date();
+
+    const diff =
+    targetDate - now;
+
+    if(diff <= 0) return;
+
+    document.getElementById('days').innerHTML =
+    Math.floor(diff/1000/60/60/24);
+
+    document.getElementById('hours').innerHTML =
+    Math.floor(diff/1000/60/60)%24;
+
+    document.getElementById('minutes').innerHTML =
+    Math.floor(diff/1000/60)%60;
+
+    document.getElementById('seconds').innerHTML =
+    Math.floor(diff/1000)%60;
+}
+
+setInterval(updateTimer,1000);
+updateTimer();
+
+/* ЗОЛОТЫЕ ЧАСТИЦЫ */
+
+const nameWrap =
+document.querySelector('.name-wrapper');
+
+setInterval(()=>{
+
+    const star =
+    document.createElement('div');
+
+    star.style.position='absolute';
+    star.style.width='4px';
+    star.style.height='4px';
+    star.style.borderRadius='50%';
+
+    star.style.background='#ffd700';
+
+    star.style.boxShadow=
+    '0 0 10px #ffd700';
+
+    star.style.left=
+    Math.random()*220+'px';
+
+    star.style.top=
+    Math.random()*80+'px';
+
+    nameWrap.appendChild(star);
+
+    let y=0;
+    let opacity=1;
+
+    const anim=
+    setInterval(()=>{
+
+        y--;
+
+        opacity-=0.03;
+
+        star.style.transform=
+        `translateY(${y}px)`;
+
+        star.style.opacity=
+        opacity;
+
+        if(opacity<=0){
+
+            clearInterval(anim);
+
+            star.remove();
+        }
+
+    },30);
+
+},180);
+
+/* ФЕЙЕРВЕРК */
+
+const canvas =
+document.getElementById('fireworks');
+
+const ctx =
+canvas.getContext('2d');
+
+function resize(){
+
+    canvas.width =
+    window.innerWidth;
+
+    canvas.height =
+    window.innerHeight;
+}
+
+resize();
+
+window.addEventListener(
+'resize',
+resize
+);
+
+let particles=[];
+
+function explode(x,y){
+
+    for(let i=0;i<80;i++){
+
+        particles.push({
+
+            x,
+            y,
+
+            angle:
+            Math.random()*
+            Math.PI*2,
+
+            speed:
+            Math.random()*6+2,
+
+            radius:
+            Math.random()*3+1,
+alpha:1
+        });
+    }
+}
+
+setInterval(()=>{
+
+    explode(
+
+        Math.random()*
+        canvas.width,
+
+        Math.random()*
+        canvas.height*0.5
+    );
+
+},1500);
+
+function animate(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(
+    (p,index)=>{
+
+        p.x+=
+        Math.cos(p.angle)*
+        p.speed;
+
+        p.y+=
+        Math.sin(p.angle)*
+        p.speed;
+
+        p.alpha-=0.01;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.radius,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle =
+        `rgba(
+            255,
+            ${150+Math.random()*100},
+            0,
+            ${p.alpha}
+        )`;
+
+        ctx.fill();
+
+        if(p.alpha<=0){
+
+            particles.splice(
+                index,
+                1
+            );
+        }
+    });
+
+    requestAnimationFrame(
+        animate
+    );
+}
+
+animate();
+
+</script>
+
+</body>
+</html>
